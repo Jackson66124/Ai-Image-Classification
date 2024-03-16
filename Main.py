@@ -4,7 +4,7 @@ import numpy as np
 import cv2
 
 model = pickle.load(open('model.p', 'rb'))
-cap = cv2.VideoCapture('C:\\Users\\kight\\ParkingSystem\\Data\\Video\\parking_1920_1080_loop.mp4')
+cap = cv2.VideoCapture('Data/Video/parking_1920_1080_loop.mp4')
 
 mask_image = cv2.imread('Data//Video//mask.png', cv2.IMREAD_GRAYSCALE)
 _, thresholded_image = cv2.threshold(mask_image, 128, 255, cv2.THRESH_BINARY)
