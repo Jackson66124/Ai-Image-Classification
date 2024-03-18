@@ -8,8 +8,15 @@ app = Flask(__name__)
 
 model = pickle.load(open('model.p', 'rb'))
 cap = cv2.VideoCapture('Data/Video/parking_1920_1080_loop.mp4')
+if not cap.isOpened:
+    print("Error, could not read video capture")
+    exit()
 
-mask_image = cv2.imread('Data/Video/mask.png', cv2.IMREAD_GRAYSCALE)
+mask_image = cv2.imread('Mask/mask.png', cv2.IMREAD_GRAYSCALE)
+if mask_image is None:
+    print("Error, could not read mask image")
+    exit()
+
 _, thresholded_image = cv2.threshold(mask_image, 128, 255, cv2.THRESH_BINARY)
 contours, _ = cv2.findContours(thresholded_image, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
